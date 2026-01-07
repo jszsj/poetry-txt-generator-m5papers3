@@ -110,7 +110,7 @@ poetry-txt-generator/
 
 ```bash
 # 克隆项目
-git clone <你的项目地址>
+git clone https://github.com/jszsj/poetry-txt-generator-m5papers3.git
 cd poetry-txt-generator-m5papers3
 
 # 初始化并更新 submodule（下载诗词数据库）
