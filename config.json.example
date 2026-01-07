@@ -1,0 +1,14 @@
+{
+  "page_lines": 14,
+  "page_columns": 13,
+  "poem_length_range": {
+    "min": 5,
+    "max": 1000
+  },
+  "input_directory": "./data/chinese-poetry/全唐诗",
+  "output_directory": "./data/output",
+  "enable_decoration": true,
+  "enable_catalog": true,
+  "title_separator": "・",
+  "poems_per_file": 20
+}
