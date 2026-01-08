@@ -45,7 +45,7 @@ def main():
         print(f"  错误: 诗词根目录不存在: {poetry_root}")
         return
 
-    parser = JsonParser(poetry_root)
+    parser = JsonParser(poetry_root, text_conversion=settings.text_conversion)
     poems_by_category = parser.load_all_poems(
         min_length=settings.min_poem_length,
         max_length=settings.max_poem_length

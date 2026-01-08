@@ -24,6 +24,7 @@ class Settings:
 
         # 文本格式化配置
         self.title_separator = '・'  # 标题中的分隔符（替换空格）
+        self.text_conversion = 'none'  # 简繁转换: none(不转换), s2t(简→繁), t2s(繁→简), s2tw(简→台湾), tw2s(台湾→简)
 
         # 文件组织配置
         self.poems_per_file = 1  # 每个文件包含的诗词数量（1=一首一文件）
@@ -57,6 +58,7 @@ class Settings:
 
             # 文本格式化
             self.title_separator = config.get('title_separator', self.title_separator)
+            self.text_conversion = config.get('text_conversion', self.text_conversion)
 
             # 文件组织
             self.poems_per_file = config.get('poems_per_file', self.poems_per_file)
@@ -79,6 +81,7 @@ class Settings:
             'enable_decoration': self.enable_decoration,
             'enable_catalog': self.enable_catalog,
             'title_separator': self.title_separator,
+            'text_conversion': self.text_conversion,
             'poems_per_file': self.poems_per_file
         }
         with open(config_file, 'w', encoding='utf-8') as f:

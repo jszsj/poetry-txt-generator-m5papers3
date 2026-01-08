@@ -5,13 +5,29 @@ import os
 class JsonParser:
     """解析JSON诗词文件，支持批量读取和分类"""
 
-    def __init__(self, poetry_root_dir):
+    def __init__(self, poetry_root_dir, text_conversion='none'):
         """初始化
         Args:
             poetry_root_dir: 诗词JSON文件的根目录
+            text_conversion: 简繁转换模式 (none/s2t/t2s/s2tw/tw2s)
         """
         self.poetry_root_dir = poetry_root_dir
         self.poems_by_category = {}
+        self.text_conversion = text_conversion
+        self.converter = None
+
+        # 初始化OpenCC转换器
+        if text_conversion != 'none':
+            try:
+                from opencc import OpenCC
+                self.converter = OpenCC(text_conversion)
+            except ImportError:
+                print("警告: opencc库未安装，简繁转换功能将被禁用")
+                print("请运行: pip install opencc-python-reimplemented")
+                self.converter = None
+            except Exception as e:
+                print(f"警告: 初始化OpenCC失败: {e}")
+                self.converter = None
 
     # 标题分隔符配置（类变量）
     TITLE_SEPARATOR = '・'  # 标题中的分隔符，可配置
@@ -121,6 +137,12 @@ class JsonParser:
 
         # 将诗句中的英文空格转换为全角空格
         paragraphs = [self._normalize_spaces(para) for para in paragraphs]
+
+        # 应用简繁转换
+        if self.converter:
+            title = self.converter.convert(title)
+            author = self.converter.convert(author)
+            paragraphs = [self.converter.convert(para) for para in paragraphs]
 
         # 计算诗词总长度
         content = ''.join(paragraphs)

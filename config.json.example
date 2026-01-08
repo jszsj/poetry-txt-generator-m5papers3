@@ -10,5 +10,6 @@
   "enable_decoration": true,
   "enable_catalog": true,
   "title_separator": "・",
+  "text_conversion": "none",
   "poems_per_file": 20
 }
